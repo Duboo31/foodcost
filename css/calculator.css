@@ -1,3 +1,6 @@
 .calculator-container {
   display: flex;
+  position: relative;
+  left: 250px;
+  top: 0;
 }
