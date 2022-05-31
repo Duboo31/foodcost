@@ -1,0 +1,33 @@
+/* 레시피 */
+.foodCost-container {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.foodCost-container > li {
+  padding: 1rem;
+  border: 1px solid black;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.foodCost-container > li div {
+  font-weight: bold;
+  grid-column: span 3;
+  /* justify-content: center; */
+  /* align-items: center; */
+}
+
+.foodCost-container > li div:nth-child(1)::before {
+  content: "메뉴 : ";
+}
+
+.foodCost-container > li div:nth-child(2)::before {
+  content: "판매금액 : ";
+}
+
+.foodCost-container > li button {
+  grid-column: span 3;
+}
