@@ -7,7 +7,7 @@
     <title>FOOCO</title>
 
     <!-- google font -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Noto+Sans+KR:wght@500&family=Roboto:wght@300&display=swap" rel="stylesheet">
 
     <!-- fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -16,9 +16,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reseter.css/2.0.0/minireseter.min.css" integrity="sha512-26lCJWeu4qh1Kd3YpqH03s+Ju7qI9mqz48E8mPE/qIoucLUbkBx6oayTM+0T3mAdC1DdT1grtnFtJNwsB+8qzw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- pages css -->
-    <link rel="stylesheet" href="/css/wrap.css">
-    <link rel="stylesheet" href="/css/calculator.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/ingredient.css">
     <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/guide.css">
 </head>
 <body>
     <div class="wrap">
@@ -27,41 +28,51 @@
             <div class="nav-logo">
                 <a href="index.html">
                   <h3>FOOCO</h3>
-                  <span class="mobile-logo">F</span>
                 </a>
             </div>
-            <div class="nav-info">
-                <ul class="nav-lists">
-                    <div class="nav-tit">Menu</div>
-                    <li class="list-item">
-                        <a class="list-link" href="index.html"><i class="nav-icon fa-regular fa-circle-question"></i><span class="desktop-text">Guide</span></a>
-                    </li>
-                    <li class="list-item">
-                        <a class="list-link" href="ingredient.html"><i class="nav-icon fa-regular fa-rectangle-list"></i><span class="desktop-text">Ingredient</span></a>
-                    </li>
-                    <li class="list-item">
-                        <a class="list-link" href="foodcost.html"><i class="nav-icon fa-solid fa-calculator"></i><span class="desktop-text">Food Cost</span></a>
-                    </li>
-                    <li class="list-item">
-                        <a class="list-link" href=""><i class="nav-icon fa-regular fa-address-book"></i><span class="desktop-text">Contact</span></a>
-                    </li>
-                  </ul>
-                <ul class="nav-user_info">
-                    <div class="nav-tit">Info</div>
-                    <li class="list-item">
-                        <a target="_blank" class="list-link" href="https://github.com/Duboo31"><i class="nav-icon fa-brands fa-github"></i><span class="desktop-text">Github</span></a>
-                    </li>
-                    <li class="list-item">
-                        <a target="_blank" class="list-link" href="https://velog.io/@duboo"><i class="nav-icon fa-brands fa-blogger"></i><span class="desktop-text">Blog</span></a>
-                    </li>
-                </ul>
+            <ul class="nav-lists">
+                <li class="list-item">
+                    <a class="list-link" href="index.html">사용 방법</a>
+                </li>
+                <li class="list-item">
+                    <a class="list-link" href="ingredient.html">재료 추가</a>
+                </li>
+                <li class="list-item">
+                    <a class="list-link" href="foodcost.html">원가계산</a>
+                </li>
+                <li class="list-item">
+                    <a class="list-link" href="#">개발자 정보</a>
+                </li>
+            </ul>
+            <div class="mobile-menu">
+                <div class="bar"></div>
             </div>
         </nav>
-
+        <div class="backToTop"><i class="fa-solid fa-angle-up"></i></div>
         <!---------------------- 메인 컨텐츠 ---------------------->
-        <div class="contents-container">
-            <h1>사이트 이용 방법 페이지</h1>
-        </div>
+        <section class="guide-container">
+            <header class="first-display">
+                <div class="background-wrap"></div>
+            </header>
+            <footer class="second-display">
+                <div class="first-display_contents">
+                    <div>
+                        <h3 class="first-display__tit">원가계산기</h3>
+                        <p> - 별도의 로그인 없이 재료, 메뉴의 원가를 계산</p>
+                        <p> - 재료의 100g당 가격 및 각 메뉴의 원가를 계산</p>
+                        <p> - 전체 메뉴의 원가를 퍼센트로 확인</p>
+                        <div><i class="fa-solid fa-circle-question"></i>사용방법</div>
+                        <div><i class="warring fa-solid fa-circle-exclamation"></i>WARNING</div>
+                    </div>
+                </div>
+                <div class="move-link">
+                    <a href="ingredient.html">재료 추가</a>
+                    <a href="foodcost.html">원가 계산</a>
+                </div>
+            </footer>
+        </section>
     </div>
+    <script src="js/navigation.js"></script>
+    <script src="js/backToTop.js"></script>
 </body>
 </html>

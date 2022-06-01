@@ -1,0 +1,143 @@
+.guide-container {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  position: absolute;
+  top: 0;
+}
+
+.first-display, .second-display {
+  width: 50%;
+  height: 100vh;
+}
+
+.background-wrap {
+  width: 100%;
+  height: 100%;
+  background: url("/img/back01.jpg") center center no-repeat;
+  background-size: cover;
+  opacity: .7;
+}
+
+.first-display_contents {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.first-display__tit {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  margin-top: -4rem;
+}
+
+.first-display_contents div p {
+  font-size: 1.2rem;
+  opacity: .5;
+  margin-bottom: .5rem;
+}
+
+.first-display_contents div div {
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  color: #333;
+}
+
+.first-display_contents div i {
+  margin-right: .5rem;
+}
+
+.warring {
+  color: rgb(255, 103, 103);
+  cursor: pointer;
+}
+
+.move-link {
+  display: flex;
+  flex-flow: row nowrap;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 50%;
+}
+
+.move-link a {
+  display: block;
+  padding: 1.5rem 2.5rem;
+  border: 1px solid #BDC3C7;
+  font-size: 1.7rem;
+  width: 50%;
+  text-align: center;
+}
+
+.move-link a:nth-child(2) {
+  background: #34495E;
+  color: #fff;
+  border: 1px solid #34495E;
+}
+
+
+
+@media screen and (max-width: 1023px) {
+  .guide-container {
+    flex-direction: column;
+  }
+
+  .first-display {
+    width: 100%;
+    height: 60vh;
+  }
+
+  .second-display {
+    width: 100%;
+    height: 40vh;
+  }
+
+  .first-display__tit {
+    font-size: 2rem;
+  }
+  
+  .first-display_contents div p {
+    font-size: 1rem;
+    opacity: .5;
+    margin-bottom: .2rem;
+  }
+  
+  .first-display_contents div div {
+    font-size: 1rem;
+    cursor: pointer;
+    color: #333;
+  }
+  
+  .first-display_contents div i {
+    margin-right: .5rem;
+  }
+
+  .move-link {
+    display: flex;
+    flex-flow: row nowrap;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+  }
+  
+  .move-link a {
+    display: block;
+    padding: 1rem 1.5rem;
+    border: 1px solid #BDC3C7;
+    font-size: 1rem;
+    width: 50%;
+    text-align: center;
+    opacity: 1;
+  }
+  
+  .move-link a:nth-child(2) {
+    background: #34495E;
+    color: #fff;
+    border: 1px solid #34495E;
+  }
+}
