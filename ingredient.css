@@ -1,0 +1,193 @@
+.ingredient-container {
+  width: 100%;
+  height: calc(100vh - 100px);
+  position: relative;
+  top: 100px;
+  left: 0;
+  display: flex;
+  margin: 0 auto;
+  max-width: 1350px;
+}
+.header {
+  display: flex;
+  flex-flow: column;
+  width: 60%;
+  padding: 0 1rem 0 2rem;
+}
+.all-ingredient {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-content: center;
+  width: 100%;
+  max-height: 200px;
+  background: url("/img/back03.jpg") no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 3px;
+  padding: 1rem 2rem;
+  color: #fff;
+}
+.total-container, .average-container {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  width: 48%;
+  height: auto;
+  background-color: rgba(10, 20, 20, 0.4);
+  padding: 1rem;
+  border-radius: 3px;
+}
+.total-container div, .average-container div {
+  font-size: 1.2rem;
+  margin-bottom: .5rem;
+}
+.total, .average {
+  font-size: 2rem;
+  font-weight: bold;
+  display: block;
+}
+.calculator-container {
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+}
+.calculator-container h3 {
+  font-size: 1.5rem;
+  width: 100%;
+  padding: 1rem 0;
+  font-weight: bold;
+}
+.calculator-container p {
+  width: 100%;
+  opacity: .6;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+#ingredient-form div, .calculator-form_input {
+  display: flex;
+  justify-content: space-between;
+}
+#ingredient-form div input, .calculator-form div input {
+  padding: .7rem;
+  border-radius: 3px;
+  margin: .5rem 0;
+  width: 49%;
+  border: 1px solid rgb(173, 173, 173);
+  font-weight: bold;
+}
+.calculator-button, .ingredient-submit {
+  border: none;
+  background: black;
+  color: #fff;
+  padding: .7rem;
+  border-radius: 3px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  margin-top: .5rem;
+}
+.calculator-result {
+  width: 100%;
+  font-size: 1.2rem;
+  margin: 1rem 0;
+  border-bottom: 1px solid rgb(190, 190, 190);
+  padding-bottom: 2rem;
+  display: flex;
+}
+.calculator-result_val {
+  color: rgb(214, 111, 111);
+  font-weight: bold;
+  padding: 0 .5rem;
+}
+.footer {
+  width: 40%;
+  padding: 0 2rem 0 1rem;
+}
+.footer > div {
+  padding: 1rem;
+  border: 1px solid rgb(190, 190, 190);
+  border-radius: 3px;
+}
+.ingredient-lists {
+  max-height: 810px;
+  overflow-y: scroll;
+  padding: 0 1rem;
+}
+.ingredient-lists_tit {
+  border-bottom: 3px solid black;
+  display: flex;
+  flex-flow:row nowrap;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  font-weight: bold;
+}
+.priceAndButton span {
+  margin-left: .2rem;
+}
+.ingredient-lists li {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: .3rem;
+  padding: .3rem .5rem;
+}
+.ingredient-lists li:nth-child(even) {
+  background: #ebebeb;
+}
+.span-tit {
+  font-weight: bold;
+}
+.ingredient-lists li button {
+  border: none;
+  cursor: pointer;
+  background: none;
+  font-size: 1.1rem;
+  margin-left: 1rem;
+  color: gray;
+}
+.ingredient-lists li button:hover {
+  color: black;
+}
+.ingredient-lists li button::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f2ed";
+}
+@media screen and (max-width: 1023px) {
+  .ingredient-container {
+    flex-direction: column;
+    top: 0;
+  }
+  .header {
+    width: 100%;
+    padding: 0 0 1rem;
+  }
+  .all-ingredient {
+    height: 200px;
+    border-radius: 0;
+    padding: 100px 2rem 1rem;
+  }
+  .calculator-container {
+    padding: 0 1rem;
+  }
+  .calculator-container p, .ingredient-wrap p {
+    font-size: 1rem;
+  }
+  .footer {
+    width: 100%;
+    padding: 0 1rem;
+  }
+  .ingredient-lists {
+    max-height: none;
+    padding: 0;
+  }
+  .ingredient-lists_tit {
+    padding: 1rem .5rem;
+  }
+  .priceAndButton span {
+    margin-left: .2rem;
+  }
+}
