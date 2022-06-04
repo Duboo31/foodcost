@@ -1,33 +1,458 @@
+.main-container {
+  width: 100%;
+  height: calc(100% - 100px);
+  position: relative;
+  top: 100px;
+  left: 0;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 0 auto;
+  max-width: 1350px;
+}
+.header-section {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+.total-display {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-content: center;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  border-radius: 5px;
+}
+.total-display_tit_view {
+  width: 49.5%;
+}
+.total-display_tit {
+  background: url("/img/back02.jpg") no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.total-display_tit h3 {
+  background: rgba(10, 10, 10, .5);
+  border-radius: 5px;
+  width: 80%;
+  height: 80%;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  padding: 3rem 2rem;
+}
+.total-display_view {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 1rem;
+  width: 100%;
+}
+.total-menu, .total-margin {
+  display: flex;
+  flex-flow: column;
+}
+.total-margin {
+  align-items: center;
+  padding-top: 1rem;
+}
+.all-recipe {
+  font-size: 2.5rem;
+}
+.all-count {
+  font-size: 1.8rem;
+  color: gray;
+  margin-bottom: .5rem;
+}
+.notice-container_item {
+  display: flex;
+  align-items: center;
+  margin-bottom: .3rem;
+}
+.notice-container_color {
+  width: 26px;
+  height: 13px;
+  display: inline-block;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+.notice-container_color.normal {
+  background: #002864;
+}
+.notice-container_color.high {
+  background: #a30000;
+}
+.notice-container_color.low {
+  background: #00612a;
+}
+.circular-progress {
+  position: relative;
+  height: 170px;
+  width: 170px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--main-input-color);
+  position: relative;
+}
+.circular-progress::before {
+  content: "";
+  position: absolute;
+  height: 86%;
+  width: 86%;
+  background: #fff;
+  border-radius: 50%;
+}
+.total-cost {
+  font-size: 1.7rem;
+  z-index: 99;
+}
+.average-display {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+}
+.form-container {
+  width: 49.5%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.form-container > div {
+  width: 100%;
+}
+.form-container form {
+  width: 100%;
+}
+.submit-food {
+  display: flex;
+  flex-flow: column;
+}
+.submit-food h3, .add-ingredient h3 {
+  font-size: 1.4rem;
+  margin-bottom: .5rem;
+}
+.submit-food_input {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: .5rem;
+}
+.menu-name, .menu-price {
+  border: 1px solid rgb(173, 173, 173);
+  border-radius: 3px;
+  font-size: 1.2rem;
+  width: 49%;
+  padding: .5rem;
+}
+.message {
+  color: gray;
+  margin-bottom: .5rem;
+}
+.add-ingredient_input {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: .5rem;
+}
+.ingredient-name, .ingredient-price {
+  border: 1px solid rgb(173, 173, 173);
+  border-radius: 3px;
+  padding: .5rem;
+  width: 37%;
+}
+.add-button {
+  width: 24%;
+  padding: .5rem;
+  border-radius: 3px;
+  border: none;
+  background: black;
+  color: #fff;
+  border: 1px solid black;
+  cursor: pointer;
+}
+#alert-message {
+  display: none;
+  color: red;
+}
+.add-ingredient_lists {
+  width: 100%;
+  height: 110px;
+  max-height: 110px;
+  overflow-y: scroll;
+}
+.add-ingredient_sub {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: .5rem;
+  padding: 0.3rem;
+  border-bottom: 2px solid rgb(206, 206, 206);
+}
+.add-ingredient_sub2 {
+  width: 30%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.add-ingredient_lists li {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: .5rem;
+  padding: 0.3rem;
+}
+.add-ingredient_lists li:nth-child(even) {
+  background: var(--main-input-color);
+}
+.add-ingredient_lists li div {
+  width: 30%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.list > span {
+  font-weight: bold;
+}
+.list div span:nth-child(1)::after {
+  content: "g";
+}
+.list div span:nth-child(2)::after {
+  content: " 원";
+}
+.submit-menu {
+  width: 50%;
+}
+.save-food {
+  border: none;
+  background: black;
+  color: #fff;
+  padding: 1rem .7rem;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: .8rem;
+  width: 99%;
+  font-size: 1rem;
+}
 /* 레시피 */
+.footer-section {
+  width: 100%;
+}
+.sort-container {
+  display: flex;
+  text-align: end;
+  position: relative;
+  padding: 0 2rem;
+}
+.sort-view {
+  display: flex;
+  cursor: pointer;
+  font-size: 1.2rem;
+  z-index: 999;
+}
+.sort-view i {
+  padding-left: .5rem;
+  line-height: 13px;
+}
+.sort-options {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  z-index: 999;
+  background: #fff;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+.sort-options.activeOption {
+  display: none;
+}
+.high-select, .low-select {
+  cursor: pointer;
+  padding: .5rem 1rem;
+}
+.high-select:hover, .low-select:hover{
+  background: black;
+  color: #fff;
+}
+.foodCost-container {
+  width: 100%;
+}
 .foodCost-container {
   display: flex;
   flex-flow: row wrap;
+  position: relative;
+  width: 100%;
 }
-
 .foodCost-container > li {
   padding: 1rem;
-  border: 1px solid black;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  /* justify-content: center; */
+  display: flex;
+  flex-flow: column wrap;
+  width: calc(25% - 1rem);
+  margin: .5rem;
+  border-radius: 3px;
+  position: relative;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+.foodCost-container > li > div:nth-child(1) {
+  font-size: 1.3rem;
+}
+.foodCost-container > li > div:nth-child(2) {
+  display: inline;
+  width: 100%;
+  font-size: 1.1rem;
+  margin-bottom: .5rem;
+}
+.foodCost-container > li button {
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 1.2rem;
+  right: 1rem;
+  background: black;
+  color: #fff;
+  padding: .3rem 1rem;
+  border-radius: 3px;
+}
+.ingredient-header {
+  display: flex;
+  width: 100%;
+  padding-right: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  color: rgb(167, 167, 167);
+  border-top: 1px solid rgb(167, 167, 167);
+  padding: .5rem 0;
+}
+.ingredient-header_tit {
+  width: 28%;
+}
+.ingredient-header_weight {
+  width: 17%;
+}
+.ingredient-header_cost {
+  justify-self: flex-end;
+  padding-right: 1rem;
+}
+.all-list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between; 
+  align-items: flex-start;
+  height: 100px;
+  max-height: 100px;
+  overflow-y: scroll;
+}
+.all-list > ul > li {
+  font-weight: bold;
+}
+.pricesAndCosts {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
   align-items: center;
 }
-
-.foodCost-container > li div {
-  font-weight: bold;
-  grid-column: span 3;
-  /* justify-content: center; */
-  /* align-items: center; */
+.pricesAndCosts ul:nth-child(1) li,
+.pricesAndCosts ul:nth-child(2) li,
+.all-list > ul > li {
+  margin-bottom: .3rem;
+}
+.pricesAndCosts ul:nth-child(1) li::after {
+  content: "그램(g)";
+}
+.pricesAndCosts ul:nth-child(1) li {
+  margin-right: 2rem;
+}
+.pricesAndCosts ul:nth-child(2) li::after {
+  content: "원";
+}
+.pricesAndCosts ul:nth-child(2) li {
+  text-align: end;
+}
+.all-cost {
+  font-size: 1.3rem;
+  border-top: 2px solid black;
+  padding: 1rem 0 .5rem;
+  text-align: end;
+}
+.margin-container {
+  width: 100%;
+  height: 1rem;
+  background: var(--main-input-color);
+  border-radius: 3px;
+}
+.margin-bar {
+  border-radius: 3px;
+  height: 1rem;
+  color :#fff;
+  padding-left: 1rem;
+  font-size: .8rem;
+  line-height: 17px;
 }
 
-.foodCost-container > li div:nth-child(1)::before {
-  content: "메뉴 : ";
+@media screen and (max-width: 1023px) {
+  .main-container {
+    width: 100%;
+    height: calc(100% - 100px);
+    position: relative;
+    top: 0;
+    flex-flow: column nowrap;
+    margin: 0 auto;
+  }
+  .header-section {
+    width: 100%;
+  }
+  .total-display {
+    flex-direction: column;
+  }
+  .total-display_tit_view {
+    width: 100%;
+  }
+  .form-container {
+    width: 100%;
+  }
+  .total-display_tit {
+    min-height: 230px;
+    align-items: flex-end;
+    padding-bottom: 2rem;
+  }
+  .total-display_tit h3 {
+    font-size: 1.7rem;
+    padding: 2rem 0;
+  }
+  .total-display_view {
+    margin-top: 0;
+  }
+  .form-container {
+    padding: 1rem;
+  }
+  .foodCost-container > li {
+    width: calc(50% - 1rem);
+  }
+  .notice-container_color {
+    width: 13px;
+  }
 }
 
-.foodCost-container > li div:nth-child(2)::before {
-  content: "판매금액 : ";
-}
-
-.foodCost-container > li button {
-  grid-column: span 3;
+@media screen and (max-width: 640px) {
+  .foodCost-container > li {
+    width: 100%
+  }
 }

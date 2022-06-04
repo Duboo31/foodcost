@@ -1,3 +1,7 @@
+:root {
+  --main-button-color: black;
+  --main-input-color: #F4F4F4;
+}
 /* reset css */
 * {
   margin: 0;

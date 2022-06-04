@@ -24,7 +24,7 @@
   background: url("/img/back03.jpg") no-repeat;
   background-size: cover;
   background-position: center;
-  border-radius: 5px;
+  border-radius: 3px;
   padding: 1rem 2rem;
   color: #fff;
 }
@@ -34,9 +34,10 @@
   justify-content: center;
   align-items: center;
   width: 48%;
+  height: auto;
   background-color: rgba(10, 20, 20, 0.4);
   padding: 1rem;
-  border-radius: 5px;
+  border-radius: 3px;
 }
 .total-container div, .average-container div {
   font-size: 1.2rem;
@@ -45,6 +46,7 @@
 .total, .average {
   font-size: 2rem;
   font-weight: bold;
+  display: block;
 }
 .calculator-container {
   display: flex;
@@ -68,21 +70,19 @@
   justify-content: space-between;
 }
 #ingredient-form div input, .calculator-form div input {
-  border: none;
   padding: .7rem;
-  border-radius: 5px;
+  border-radius: 3px;
   margin: .5rem 0;
   width: 49%;
-  background: rgb(235, 235, 235);
+  border: 1px solid rgb(173, 173, 173);
   font-weight: bold;
-  outline: none;
 }
 .calculator-button, .ingredient-submit {
   border: none;
   background: black;
   color: #fff;
   padding: .7rem;
-  border-radius: 5px;
+  border-radius: 3px;
   font-weight: bold;
   cursor: pointer;
   width: 100%;
@@ -106,9 +106,9 @@
   padding: 0 2rem 0 1rem;
 }
 .footer > div {
-  padding: 0 1rem;
+  padding: 1rem;
   border: 1px solid rgb(190, 190, 190);
-  border-radius: 5px;
+  border-radius: 3px;
 }
 .ingredient-lists {
   max-height: 810px;
@@ -135,7 +135,7 @@
   padding: .3rem .5rem;
 }
 .ingredient-lists li:nth-child(even) {
-  background: rgb(243, 243, 243);
+  background: #ebebeb;
 }
 .span-tit {
   font-weight: bold;
