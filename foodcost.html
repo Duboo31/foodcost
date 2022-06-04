@@ -7,7 +7,7 @@
     <title>FOOCO</title>
 
     <!-- google font -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Noto+Sans+KR:wght@500&family=Roboto:wght@300&display=swap" rel="stylesheet">
 
     <!-- fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -16,9 +16,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reseter.css/2.0.0/minireseter.min.css" integrity="sha512-26lCJWeu4qh1Kd3YpqH03s+Ju7qI9mqz48E8mPE/qIoucLUbkBx6oayTM+0T3mAdC1DdT1grtnFtJNwsB+8qzw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- pages css -->
-    <link rel="stylesheet" href="/css/wrap.css">
-    <link rel="stylesheet" href="/css/calculator.css">
+    <link rel="stylesheet" href="/css/reset.css">
     <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/foodcost.css">
 </head>
 <body>
     <div class="wrap">
@@ -27,40 +27,113 @@
             <div class="nav-logo">
                 <a href="index.html">
                   <h3>FOOCO</h3>
-                  <span class="mobile-logo">F</span>
                 </a>
             </div>
-            <div class="nav-info">
-                <ul class="nav-lists">
-                    <div class="nav-tit">Menu</div>
-                    <li class="list-item">
-                        <a class="list-link" href="index.html"><i class="nav-icon fa-regular fa-circle-question"></i><span class="desktop-text">Guide</span></a>
-                    </li>
-                    <li class="list-item">
-                        <a class="list-link" href="ingredient.html"><i class="nav-icon fa-regular fa-rectangle-list"></i><span class="desktop-text">Ingredient</span></a>
-                    </li>
-                    <li class="list-item">
-                        <a class="list-link" href="foodcost.html"><i class="nav-icon fa-solid fa-calculator"></i><span class="desktop-text">Food Cost</span></a>
-                    </li>
-                    <li class="list-item">
-                        <a class="list-link" href=""><i class="nav-icon fa-regular fa-address-book"></i><span class="desktop-text">Contact</span></a>
-                    </li>
-                  </ul>
-                <ul class="nav-user_info">
-                    <div class="nav-tit">Info</div>
-                    <li class="list-item">
-                        <a target="_blank" class="list-link" href="https://github.com/Duboo31"><i class="nav-icon fa-brands fa-github"></i><span class="desktop-text">Github</span></a>
-                    </li>
-                    <li class="list-item">
-                        <a target="_blank" class="list-link" href="https://velog.io/@duboo"><i class="nav-icon fa-brands fa-blogger"></i><span class="desktop-text">Blog</span></a>
-                    </li>
-                </ul>
+            <ul class="nav-lists">
+                <li class="list-item">
+                    <a class="list-link" href="index.html">Home</a>
+                </li>
+                <li class="list-item">
+                    <a class="list-link" href="ingredient.html">Add Ingredient</a>
+                </li>
+                <li class="list-item">
+                    <a class="list-link" href="foodcost.html">Food Cost</a>
+                </li>
+                <li class="list-item">
+                    <a class="list-link" href="AboutMe.html">About Me</a>
+                </li>
+            </ul>
+            <div class="mobile-menu">
+                <div class="bar"></div>
             </div>
         </nav>
+        <div class="backToTop"><i class="fa-solid fa-angle-up"></i></div>
+
         <!---------------------- 메인 컨텐츠 ---------------------->
-        <div class="contents-container">
-            <h1>푸드 코스트 페이지 푸드 코스트 페이지 푸드 코스트 페이지</h1>
+        <div class="main-container">
+            <section class="header-section">
+                <div class="total-display">
+                    <div class="total-display_tit_view">
+                        <div class="total-display_tit">
+                            <h3>Food Cost</h3>
+                        </div>
+                        <div class="total-display_view">
+                            <div class="total-menu">
+                                <div class="all-recipe">0</div>
+                                <div class="all-count">Menu Cost</div>
+                                <div class="notice-container">
+                                    <div class="notice-container_item">
+                                        <span class="notice-container_color normal"></span><span>NORMAL 30 ~ 35</span>
+                                    </div>
+                                    <div class="notice-container_item">
+                                        <span class="notice-container_color high"></span><span>HIGH 36 ~
+                                        </span>
+                                    </div>
+                                    <div class="notice-container_item">
+                                        <span class="notice-container_color low"></span><span>LOW ~ 29</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="total-margin">
+                                <div class="circular-progress">
+                                    <div class="total-cost">0%</div>
+                                </div>
+                                <div class="average-display">평균 원가율</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-container">
+                        <div>
+                            <form class="submit-food">
+                                <h3>메뉴 입력</h3>
+                                <div class="submit-food_input">
+                                    <input required class="menu-name" type="text" placeholder="메뉴">
+                                    <input required class="menu-price" type="text" placeholder="판매가격">
+                                </div>
+                            </form>
+                            <form class="add-ingredient">
+                                <h3>메뉴 재료</h3>
+                                <p class="message">메뉴 추가로 추가하지 않은 재료로는 원가계산을 할 수 없습니다</p>
+                                <p id="alert-message">재료를 입력하세요</p>
+                                <div class="add-ingredient_input">
+                                    <input required class="ingredient-name" type="text" list="ingredient">
+                                    <datalist id="ingredient"></datalist>
+                                    <input required class="ingredient-price" type="text" placeholder=" 재료 단위: 그람(g)">
+                                    <input class="add-button" type="submit" value="재료 입력">
+                                </div>
+                                <div class="add-ingredient_sub">
+                                    <div class="add-ingredient_tit">재료</div>
+                                    <div class="add-ingredient_sub2">
+                                        <div>그램(g)</div>
+                                        <div>비용</div>
+                                    </div>
+                                </div>
+                                <ul class="add-ingredient_lists"></ul>
+                            </form>
+                        </div>
+                        <form class="submit-menu">
+                            <input class="save-food" type="submit" value="메뉴 등록">
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <section class="footer-section">
+                <div class="sort-container">
+                    <div class="sort-view">
+                        Filters<i class="fa-solid fa-sort-down"></i>
+                        <div class="sort-options activeOption">
+                            <div class="high-select">높은순 보기</div>
+                            <div class="low-select">낮은순 보기</div>
+                        </div>
+                    </div>
+                </div>
+                <ul class="foodCost-container"></ul>
+            </section>
         </div>
     </div>
+    <script src="js/foodcost.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/backToTop.js"></script>
 </body>
 </html>
