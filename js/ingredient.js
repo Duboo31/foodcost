@@ -3,7 +3,7 @@
 const priceEl = document.querySelector("#input-price");
 const weightEl = document.querySelector("#input-weight");
 const calculatorButton = document.querySelector(".calculator-button");
-const resultEl = document.querySelector(".calculator-result");
+const resultVarEl = document.querySelector(".calculator-result_val");
 
 // ingredients
 const ingredientForm = document.querySelector("#ingredient-form");
@@ -29,24 +29,32 @@ const getAverage = (ingredients) => {
     result += parseInt(ingredient.price);
   })
 
+  if(!result) {
+    return "0";
+  }
   return numberWithCommas(Math.floor(result / ingredients.length));
 }
 
-// 그람당 가격 계산기
-const calculatorFn = () => {
-  resultEl.innerText = `100g 당 가격은 ${Math.floor(priceEl.value/weightEl.value*100)} 원입니다.`;
-  priceEl.value = "";
-  weightEl.value = "";
-}
-
-// 가격에 콤마 추가
+// 숫자에 콤마 추가
 const numberWithCommas = (x) => {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 // 저장소에 저장 함수
 const saveIngredient = () => {
-  localStorage.setItem(INGREDIENT_KEY, JSON.stringify(ingredients))
+  localStorage.setItem(INGREDIENT_KEY, JSON.stringify(ingredients));
+}
+
+// 삭제 함수
+const deleteIngredient = (event) => {
+  const li = event.target.parentElement.parentElement;
+  li.remove();
+
+  ingredients = ingredients.filter(ingredient => ingredient.id !== parseInt(li.id));
+  saveIngredient();
+
+  totalEl.innerText = `${ingredients.length}`;
+  averageEl.innerText = `${getAverage(ingredients)}원`;
 }
 
 // 재료 출력 함수
@@ -57,13 +65,23 @@ const paintIngredient = (newIngredient) => {
   const spanName = document.createElement("span");
   const spanPrice = document.createElement("span");
 
+  spanName.classList.add("span-tit");
+
+  const priceAndButton = document.createElement("div");
+  const button = document.createElement('button');
+  button.innerText = "";
+  button.addEventListener('click', deleteIngredient);
+
+  priceAndButton.appendChild(spanPrice);
+  priceAndButton.appendChild(button);
+
   li.appendChild(spanName);
-  li.appendChild(spanPrice);
+  li.appendChild(priceAndButton);
 
   ingredientLists.appendChild(li);
 
   totalEl.innerText = `${ingredients.length}`;
-  averageEl.innerText = getAverage(ingredients);
+  averageEl.innerText = `${getAverage(ingredients)}원`;
 
   spanName.innerText = newIngredient.name;
   spanPrice.innerText = `${numberWithCommas(newIngredient.price)}원`;
@@ -85,7 +103,7 @@ const handleIngredientSubmit = (event) => {
   }
   ingredients.push(newIngredientObj);
   paintIngredient(newIngredientObj);
-  saveIngredient()
+  saveIngredient();
 }
 
 // 저장소 재료들 출력
@@ -95,6 +113,20 @@ if(savedIngredient !== null) {
   const parsedIngredient = JSON.parse(savedIngredient);
   ingredients = parsedIngredient;
   parsedIngredient.forEach(paintIngredient);
+}
+
+// 그램당 가격 계산기
+const calculatorFn = () => {
+  if(!priceEl.value) {
+    priceEl.focus();
+  } else if(!weightEl.value) {
+    weightEl.focus();
+  } else {
+    resultVarEl.innerText = `${Math.floor(priceEl.value/weightEl.value*100)}`;
+    ingredientPrice.value = Math.floor(priceEl.value/weightEl.value*100);
+    priceEl.value = "";
+    weightEl.value = "";
+  }
 }
 
 // ------------------------ EVENTS ------------------------

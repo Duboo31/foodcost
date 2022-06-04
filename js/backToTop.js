@@ -1,12 +1,19 @@
 // ---------------------- DOM ----------------------
 const backToTop = document.querySelector(".backToTop");
+const navContainer = document.querySelector(".nav-container");
 
 // ---------------------- VARIABLES ----------------------
 const showArrow = 100;
 
 // ---------------------- FUNCTIONS ----------------------
 window.addEventListener("scroll", () => {
-    window.pageYOffset > showArrow ? backToTop.classList.add("show") : backToTop.classList.remove("show");
+    if(window.pageYOffset > showArrow) {
+      backToTop.classList.add("show");
+      navContainer.style.background = "rgba(0, 0, 0, 0.5)";
+    } else {
+      backToTop.classList.remove("show");
+      navContainer.style.background = "none";
+    } 
   
 })
 

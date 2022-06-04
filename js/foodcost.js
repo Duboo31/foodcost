@@ -1,66 +1,90 @@
 // ------------------------- DOM -------------------------
+// OPTIONS
 const datalistEl = document.querySelector("#ingredient");
+
 const ingredientList = document.querySelector(".add-ingredient_lists");
 
 const ingredientAddButton = document.querySelector(".add-button");
 const ingredientName = document.querySelector(".ingredient-name");
 const ingredientPrice = document.querySelector(".ingredient-price");
-const foodName = document.querySelector(".food-name");
-const foodPrice = document.querySelector(".food-price");
+const menuName = document.querySelector(".menu-name");
+const menuPrice = document.querySelector(".menu-price");
 const foodCostContainer = document.querySelector(".foodCost-container");
-const saveFood = document.querySelector(".save-food");
+const saveFoodButton = document.querySelector(".save-food");
 
+// TOTAL DISPLAY
 const totalDisplay = document.querySelector(".all-recipe");
 const averageDisplay = document.querySelector(".total-cost");
 
 // PROGRESS
-const progressBar = document.querySelector(".circular-progress");
-const valueContainer = document.querySelector(".total-cost");
+const circularProgress = document.querySelector(".circular-progress");
+const totalValueEl = document.querySelector(".total-cost");
+
+// 유효성 검사
+const warningMessage = document.querySelector(".add-ingredient p");
+const alertMessage = document.querySelector("#alert-message");
+
+// 높은순 낮은순 정렬
+const highEl = document.querySelector(".high-select");
+const lowEl = document.querySelector(".low-select");
+const sortOptions = document.querySelector(".sort-options");
+const sortElContainer = document.querySelector(".sort-view");
 
 // ------------------------- VARIABLES -------------------------
-const INGREDIENT_KEY = "ingredients";
 const FOOD_INGREDIENTS_KEY = "foodIngredient";
+const INGREDIENT_KEY = "ingredients";
 
 const savedIngredient = localStorage.getItem(INGREDIENT_KEY);
 const parseIngredient = JSON.parse(savedIngredient);
 
-const savedFoodCost = localStorage.getItem(FOOD_INGREDIENTS_KEY);
-
 let foodCost = [];
+let options = [];
 
 // ------------------------- FUNCTIONS -------------------------
+// 정렬 박스 온/오프
+const sortActive = () => {
+  sortOptions.classList.toggle("activeOption");
+}
+
+// 저장소 재료 빼오기
+parseIngredient.forEach(ingredient => {
+  const option = document.createElement("option");
+  option.value = ingredient.name;
+  datalistEl.appendChild(option);
+  options.push(ingredient.name);
+})
+
 // PROGRESS
-const progress = () => {
+const paintProgress = () => {
   let marginSum = 0;
 
-  foodCost.forEach(el => {
-    marginSum += Number(el.getMargin)
-  })
+  foodCost.forEach(menu => {
+    marginSum += Number(menu.getMargin);
+  });
 
   let getAverageMargin = Math.ceil(marginSum / foodCost.length);
 
   if(foodCost.length) {
-    valueContainer.innerText = `${getAverageMargin}%`;
+    totalValueEl.innerText = `${getAverageMargin}%`;
   } else {
-    valueContainer.innerText = "0%";
-    progressBar.style.background = "gray";
-    return;
+    totalValueEl.innerText = "0%";
+    circularProgress.style.background = "var(--main-input-color)";
   }
 
   if(getAverageMargin > 35) {
-    progressBar.style.background = `conic-gradient(
-      #F28C28 ${getAverageMargin * 3.6}deg,
-      gray ${getAverageMargin * 3.6}deg
+    circularProgress.style.background = `conic-gradient(
+      #a30000 ${getAverageMargin * 3.6}deg,
+      var(--main-input-color) ${getAverageMargin * 3.6}deg
     )`
   } else if(getAverageMargin >= 30 && getAverageMargin <= 35) {
-    progressBar.style.background = `conic-gradient(
-      #0F52BA ${getAverageMargin * 3.6}deg,
-      gray ${getAverageMargin * 3.6}deg
+    circularProgress.style.background = `conic-gradient(
+      #002864 ${getAverageMargin * 3.6}deg,
+      var(--main-input-color) ${getAverageMargin * 3.6}deg
     )`
   } else if(getAverageMargin < 30) {
-    progressBar.style.background = `conic-gradient(
-      #2E8B57 ${getAverageMargin * 3.6}deg,
-      gray ${getAverageMargin * 3.6}deg
+    circularProgress.style.background = `conic-gradient(
+      #00612a ${getAverageMargin * 3.6}deg,
+      var(--main-input-color) ${getAverageMargin * 3.6}deg
     )`
   }
 };
@@ -75,17 +99,25 @@ const printTotalMenu = () => {
   totalDisplay.innerText = foodCost.length;
 }
 
-// 저장소 재료 빼오기
-parseIngredient.forEach(el => {
-  const option = document.createElement("option");
-  option.value = el.name;
-  datalistEl.appendChild(option);
-})
-
 // 저장소에 저장 함수
 const saveFoodCost = () => {
   localStorage.setItem(FOOD_INGREDIENTS_KEY, JSON.stringify(foodCost))
 }
+
+// 정렬
+const lowSortPrint = () => {
+  foodCost = foodCost.sort((a, b) => Number(a.getMargin) - Number(b.getMargin));
+  saveFoodCost();
+  location.reload();
+}
+
+const highSortPrint = () => {
+  foodCost = foodCost.sort((a, b) => Number(b.getMargin) - Number(a.getMargin));
+  saveFoodCost();
+  location.reload();
+}
+
+
 
 // 삭제 함수
 const deleteFoodCost = (event) => {
@@ -95,138 +127,174 @@ const deleteFoodCost = (event) => {
 
   saveFoodCost();
   printTotalMenu();
-  progress();
+  paintProgress();
 }
 
 // 재료 출력 함수
 const paintFoodCost = (newFoodCostObj) => {
-  const foodCostWrap = document.createElement("li");
-  foodCostWrap.id = newFoodCostObj.id;
+  const menuListItem = document.createElement("li");
+  menuListItem.id = newFoodCostObj.id;
 
-  const foodCostFood = document.createElement("div");
-  const foodCostSalePrice = document.createElement("div");
+  const menuTitle = document.createElement("div");
+  const menuSalePrice = document.createElement("div");
 
-  foodCostFood.innerText = newFoodCostObj.food;
-  foodCostSalePrice.innerText = `${numberWithCommas(newFoodCostObj.salePrice)}원`;
+  menuTitle.innerText = newFoodCostObj.menuTitle;
+  menuSalePrice.innerText = `${numberWithCommas(newFoodCostObj.salePrice)}원`;
 
-  const allList = document.createElement("div");
+  // 재료 리스트 헤더
+  const ingredientHeaderEl = document.createElement("div");
+  
+  const ingredientHeaderTit = document.createElement("div");
+  const ingredientHeaderWeight = document.createElement("div");
+  const ingredientHeaderCost = document.createElement("div");
+  
+  ingredientHeaderEl.classList.add("ingredient-header");
+  ingredientHeaderTit.classList.add("ingredient-header_tit");
+  ingredientHeaderWeight.classList.add("ingredient-header_weight");
+  ingredientHeaderCost.classList.add("ingredient-header_cost");
 
-  allList.classList.add("all-list");
+  ingredientHeaderTit.innerText = "재료";
+  ingredientHeaderWeight.innerText = "무게";
+  ingredientHeaderCost.innerText = "금액";
 
-  const foodCostNames = document.createElement("ul");
+  ingredientHeaderEl.appendChild(ingredientHeaderTit);
+  ingredientHeaderEl.appendChild(ingredientHeaderWeight);
+  ingredientHeaderEl.appendChild(ingredientHeaderCost);
+  
+  // 사용 재료 총 리스트
+  const ingredientInfo = document.createElement("div");
 
-  newFoodCostObj.name.forEach(el => {
-    const foodCostName = document.createElement("li");
+  ingredientInfo.classList.add("all-list");
 
-    foodCostName.innerText = el;
-    foodCostNames.appendChild(foodCostName);
+  const ingredientTitContainer = document.createElement("ul");
+
+  newFoodCostObj.ingredientTit.forEach(menu => {
+    const ingredientTit = document.createElement("li");
+
+    ingredientTit.innerText = menu;
+    ingredientTitContainer.appendChild(ingredientTit);
   })
 
   const pricesAndCostsEl = document.createElement("div");
   pricesAndCostsEl.classList.add("pricesAndCosts")
 
-  const foodCostPrices = document.createElement("ul");
+  const ingredientPriceContainer = document.createElement("ul");
 
-  newFoodCostObj.price.forEach(el => {
-    const foodCostPrice = document.createElement("li");
+  newFoodCostObj.ingredientPrice.forEach(menu => {
+    const ingredientPrice = document.createElement("li");
 
-    foodCostPrice.innerText = el;
-    foodCostPrices.appendChild(foodCostPrice);
+    ingredientPrice.innerText = menu;
+    ingredientPriceContainer.appendChild(ingredientPrice);
   })
 
-  const foodCostCosts = document.createElement("ul");
+  const ingredientCostContainer = document.createElement("ul");
 
-  newFoodCostObj.cost.forEach(el => {
-    const foodCostCost = document.createElement("li");
+  newFoodCostObj.ingredientCost.forEach(menu => {
+    const ingredientCost = document.createElement("li");
 
-    foodCostCost.innerText = `${numberWithCommas(el)}`;;
-    foodCostCosts.appendChild(foodCostCost);
+    ingredientCost.innerText = `${numberWithCommas(menu)}`;
+    ingredientCostContainer.appendChild(ingredientCost);
   })
 
-  const allCostEl = document.createElement("div");
-  allCostEl.classList.add("all-cost");
-  allCostEl.innerText = `총합 ${(numberWithCommas(newFoodCostObj.getSumCost))}원`;
+  const sumCostEl = document.createElement("div");
+  sumCostEl.classList.add("all-cost");
+  sumCostEl.innerText = `₩ ${(numberWithCommas(newFoodCostObj.getSumCost))}원`;
 
   const marginEl = document.createElement("div");
   const marginContainer = document.createElement("div");
   marginEl.classList.add("margin-bar");
   marginContainer.classList.add("margin-container");
   marginEl.innerText = `${newFoodCostObj.getMargin}%`;
+
   marginEl.style.width = `${newFoodCostObj.getMargin}%`
   if(Number(newFoodCostObj.getMargin) > 35) {
-    marginEl.style.background = "#F28C28";
+    marginEl.style.background = "#a30000";
+    if(Number(newFoodCostObj.getMargin) > 100) {
+      marginEl.style.width = "100%";
+    }
   } else if(Number(newFoodCostObj.getMargin) >= 30 && Number(newFoodCostObj.getMargin) <= 35) {
-    marginEl.style.background = "#0F52BA";
+    marginEl.style.background = "#002864";
   } else if(Number(newFoodCostObj.getMargin) < 30) {
-    marginEl.style.background = "#2E8B57";
+    marginEl.style.background = "#00612a";
   }
-
-  marginContainer.appendChild(marginEl);
-
-  pricesAndCostsEl.appendChild(foodCostPrices);
-  pricesAndCostsEl.appendChild(foodCostCosts);
-
-  allList.appendChild(foodCostNames);
-  allList.appendChild(pricesAndCostsEl)
 
   const button = document.createElement('button');
   button.innerText = "삭제";
   button.addEventListener('click', deleteFoodCost);
 
-  foodCostWrap.appendChild(foodCostFood);
-  foodCostWrap.appendChild(foodCostSalePrice);
-  foodCostWrap.appendChild(allList);
+  marginContainer.appendChild(marginEl);
 
-  foodCostWrap.appendChild(allCostEl);
-  foodCostWrap.appendChild(marginContainer);
+  pricesAndCostsEl.appendChild(ingredientPriceContainer);
+  pricesAndCostsEl.appendChild(ingredientCostContainer);
 
-  foodCostWrap.appendChild(button);
+  ingredientInfo.appendChild(ingredientTitContainer);
+  ingredientInfo.appendChild(pricesAndCostsEl);
 
-  foodCostContainer.appendChild(foodCostWrap);
+  menuListItem.appendChild(menuTitle);
+  menuListItem.appendChild(menuSalePrice);
+  menuListItem.appendChild(ingredientHeaderEl);
+  menuListItem.appendChild(ingredientInfo);
+
+  menuListItem.appendChild(sumCostEl);
+  menuListItem.appendChild(marginContainer);
+
+  menuListItem.appendChild(button);
+
+  foodCostContainer.appendChild(menuListItem);
 
   printTotalMenu();
-  progress();
+  paintProgress();
 }
 
 // 재료 추가
 const addIngredients = (event) => {
   event.preventDefault();
-  const li = document.createElement("li");
-  li.classList.add("list");
+  const ingredientListLi = document.createElement("li");
+  ingredientListLi.classList.add("list");
 
-  const nameEl = document.createElement("span");
+  const ingredientTitEl = document.createElement("span");
 
   const priceAndCostEl = document.createElement("div");
 
   const priceEl = document.createElement("span");
   const costEl = document.createElement("span");
 
-  const useName = ingredientName.value;
+  const useIngredientName = ingredientName.value;
   const usePrice = ingredientPrice.value;
 
-  nameEl.innerText = useName;
-  priceEl.innerText = usePrice;
+  // 옵션에 있는 값인지 확인하는 유효성 검사
+  if(!options.includes(useIngredientName)) {
+    warningMessage.style.color = "red";
+    ingredientName.value = "";
+    ingredientPrice.value = "";
+  } else {
+    alertMessage.style.display = "none";
+    warningMessage.style.color = "black";
 
-  parseIngredient.forEach((el) => {
-    if(el.name === useName) {
-      costEl.innerText = `${Math.ceil(Number(el.price) * Number(usePrice) / 100)}`
-    }
-  })
+    ingredientTitEl.innerText = useIngredientName;
+    priceEl.innerText = usePrice;
 
-  li.appendChild(nameEl);
+    parseIngredient.forEach((ingredient) => {
+      if(ingredient.name === useIngredientName) {
+        costEl.innerText = `${Math.ceil(Number(ingredient.price) * Number(usePrice) / 100)}`
+      }
+    })
 
-  priceAndCostEl.appendChild(priceEl);
-  priceAndCostEl.appendChild(costEl);
+    ingredientListLi.appendChild(ingredientTitEl);
 
-  li.appendChild(priceAndCostEl);
+    priceAndCostEl.appendChild(priceEl);
+    priceAndCostEl.appendChild(costEl);
 
-  ingredientList.appendChild(li);
+    ingredientListLi.appendChild(priceAndCostEl);
 
-  ingredientName.value = "";
-  ingredientPrice.value = "";
+    ingredientList.appendChild(ingredientListLi);
+
+    ingredientName.value = "";
+    ingredientPrice.value = "";
+  }
 }
 
-// 추가한 출력 재료 없애기
+// 메뉴 재료에 추가한 출력 재료 없애기
 const clearAddList = () => {
   ingredientList.innerHTML = "";
 }
@@ -235,53 +303,61 @@ const clearAddList = () => {
 const handleFoodCostSubmit = (event) => {
   event.preventDefault();
 
-  const foodTit = foodName.value;
-  const foodSale = foodPrice.value;
+  const menuTit = menuName.value;
+  const menuSale = menuPrice.value;
 
-  if(!foodTit) {
-    foodName.focus();
+  if(!menuTit) {
+    menuName.focus();
     return;
-  } else if(!foodSale) {
-    foodPrice.focus();
+  } else if(!menuSale) {
+    menuPrice.focus();
     return;
   }
 
-  let arrName = [];
-  let arrPrice = [];
-  let arrCost = [];
-  let sumCost = 0;
+  // 재료를 하나라도 넣었는지 확인하는 유효성 검사
+  if(ingredientList.childNodes.length !== 0) {
+    alertMessage.style.display = "none";
 
-  const ingredientLists = document.querySelectorAll(".list");
+    let ingredientTitArr = [];
+    let ingredientPriceArr = [];
+    let ingredientCostArr = [];
+    let ingredientSumCost = 0;
 
-  ingredientLists.forEach(el => {
-    arrName.push(el.childNodes[0].innerText);
-    arrPrice.push(el.childNodes[1].childNodes[0].innerText);
-    arrCost.push(el.childNodes[1].childNodes[1].innerText);
-    sumCost += Number(el.childNodes[1].childNodes[1].innerText);
-  })
+    const ingredientLists = document.querySelectorAll(".list");
 
+    ingredientLists.forEach(ingredient => {
+      ingredientTitArr.push(ingredient.childNodes[0].innerText);
+      ingredientPriceArr.push(ingredient.childNodes[1].childNodes[0].innerText);
+      ingredientCostArr.push(ingredient.childNodes[1].childNodes[1].innerText);
+      ingredientSumCost += Number(ingredient.childNodes[1].childNodes[1].innerText);
+    })
 
-  const newFoodCostObj = {
-    food: foodTit,
-    salePrice: foodSale,
-    name: arrName,
-    price: arrPrice,
-    cost: arrCost,
-    getSumCost: sumCost,
-    getMargin: `${Math.ceil(Number(sumCost / foodSale) * 100)}`,
-    id: Date.now()
+    const newFoodCostObj = {
+      menuTitle: menuTit,
+      salePrice: menuSale,
+      ingredientTit: ingredientTitArr,
+      ingredientPrice: ingredientPriceArr,
+      ingredientCost: ingredientCostArr,
+      getSumCost: ingredientSumCost,
+      getMargin: `${Math.ceil(Number(ingredientSumCost / menuSale) * 100)}`,
+      id: Date.now()
+    }
+
+    menuName.value = "";
+    menuPrice.value = "";
+
+    foodCost.push(newFoodCostObj);
+    paintFoodCost(newFoodCostObj);
+    saveFoodCost();
+    clearAddList();
+  } else {
+    alertMessage.style.display = "block";
   }
-
-  foodName.value = "";
-  foodPrice.value = "";
-
-  foodCost.push(newFoodCostObj);
-  paintFoodCost(newFoodCostObj);
-  saveFoodCost();
-  clearAddList();
 }
 
 // 저장소 체크 및 데이터 출력
+const savedFoodCost = localStorage.getItem(FOOD_INGREDIENTS_KEY);
+
 if(savedFoodCost !== null) {
   const parsedFoodCost = JSON.parse(savedFoodCost);
   foodCost = parsedFoodCost;
@@ -290,4 +366,7 @@ if(savedFoodCost !== null) {
 
 // ------------------------- EVENTS -------------------------
 ingredientAddButton.addEventListener("click", addIngredients);
-saveFood.addEventListener("click", handleFoodCostSubmit);
+saveFoodButton.addEventListener("click", handleFoodCostSubmit);
+lowEl.addEventListener("click", lowSortPrint);
+highEl.addEventListener("click", highSortPrint);
+sortElContainer.addEventListener("click", sortActive);

@@ -21,5 +21,3 @@ listItems.forEach(listItem => {
 // ------------------------ EVENTS ------------------------
 mobileButton.addEventListener("click", activeBt);
 navLists.addEventListener("click", activeBt);
-
-
