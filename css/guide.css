@@ -25,7 +25,7 @@
 .background-wrap {
   width: 85%;
   height: 95%;
-  background: url("/img/back01.jpg") center center no-repeat;
+  background: url("img/back01.jpg") center center no-repeat;
   background-size: cover;
   border-top-right-radius: 30%;
   border-bottom-left-radius: 30%;
