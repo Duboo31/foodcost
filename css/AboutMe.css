@@ -27,7 +27,7 @@
 .info-img {
   width: 100%;
   height: 500px;
-  background: url("./img/back01.JPG") no-repeat;
+  background: url("img/back01.JPG") no-repeat;
   background-size: cover;
 }
 .footer {
