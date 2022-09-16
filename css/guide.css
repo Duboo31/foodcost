@@ -67,6 +67,8 @@
 @media screen and (max-width: 1023px) {
   .guide-container {
     flex-direction: column;
+    position: fixed;
+    bottom: 0;
   }
   .background-wrap {
     width: 100vw;
